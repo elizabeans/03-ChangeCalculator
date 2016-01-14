@@ -43,7 +43,7 @@ namespace ChangeCalculator
             // Get cost and payment
             double cost = GetDoubleFromConsole("How much does the item cost?");
             double payment = GetDoubleFromConsole("How much has the customer given you?");
- 
+
             // Calculate change 
             double change = payment - cost;
 
@@ -59,72 +59,31 @@ namespace ChangeCalculator
             }
             else
             {
-                while (change > 0)
-                {   // Giant if-else loop of change! 
-                    if (change >= 100)
-                    {
-                        num100bills = change / 100;
-                        change = change % 100;
-                    }
-                    else if (change >= 50)
-                    {
-                        num50bills = change / 50;
-                        change = change % 50;
-                    }
-                    else if (change >= 20)
-                    {
-                        num20bills = change / 20;
-                        change = change % 20;
-                    }
-                    else if (change >= 10)
-                    {
-                        num10bills = change / 10;
-                        change = change % 10;
-                    }
-                    else if (change >= 5)
-                    {
-                        num5bills = change / 5;
-                        change = change % 5;
-                    }
-                    else if (change >= 1)
-                    {
-                        num1bills = (change / 1) - (change % 1);
-                        change = change % 1;
-                    }
-                    else if (change >= 0.25)
-                    {
-                        numQuarters = change / 0.25;
-                        change = change % 0.25;
-                    }
-                    else if (change >= 0.10)
-                    {
-                        numDimes = change / 0.10;
-                        change = change % 0.10;
-                    }
-                    else if (change >= 0.05)
-                    {
-                        numNickels = change / 0.05;
-                        change = change % 0.05;
-                    }
-                    else
-                    {
-                        numPennies = change / 0.01;
-                        change = 0;
-                    }
-                }
+                Console.WriteLine("The customer's change is $" + string.Format("{0:0.00}", change));
 
-                    // Print out how much change and how it should be divided
-                    Console.WriteLine("The customer's change is $" + string.Format("{0:0.00}", change));
-                    Console.WriteLine("$100 bill: " + num100bills);
-                    Console.WriteLine("50 bill: " + num50bills);
-                    Console.WriteLine("20 bill: " + num20bills);
-                    Console.WriteLine("10 bill: " + num10bills);
-                    Console.WriteLine("5 bill: " + num5bills);
-                    Console.WriteLine("1 bill: " + num1bills);
-                    Console.WriteLine("Quarters: " + numQuarters);
-                    Console.WriteLine("Dimes: " + numDimes);
-                    Console.WriteLine("Nickels: " + numNickels);
-                    Console.WriteLine("Pennies: " + numPennies);
+                // Calculate how many of each amount needed
+                num100bills = Math.Floor(change / 100);
+                num50bills = Math.Floor(change % 100 / 50);
+                num20bills = Math.Floor(change % 100 % 50 / 20);
+                num10bills = Math.Floor(change % 100 % 50 % 20 / 10);
+                num5bills = Math.Floor(change % 100 % 50 % 20 % 10 / 5);
+                num1bills = Math.Floor(change % 100 % 50 % 20 % 10 % 5 / 1);
+                numQuarters = Math.Floor(change % 100 % 50 % 20 % 10 % 5 % 1 / 0.25);
+                numDimes = Math.Floor(change % 100 % 50 % 20 % 10 % 5 % 1 % 0.25 / 0.10);
+                numNickels = Math.Floor(change % 100 % 50 % 20 % 10 % 5 % 1 % 0.25 % 0.10 / 0.05);
+                numPennies = Math.Floor(change % 100 % 50 % 20 % 10 % 5 % 1 % 0.25 % 0.10 % 0.05 / 0.01);
+
+                // Print out how much change and how it should be divided
+                Console.WriteLine("$100 bill: " + num100bills);
+                Console.WriteLine("$50 bill: " + num50bills);
+                Console.WriteLine("20 bill: " + num20bills);
+                Console.WriteLine("10 bill: " + num10bills);
+                Console.WriteLine("5 bill: " + num5bills);
+                Console.WriteLine("1 bill: " + num1bills);
+                Console.WriteLine("Quarters: " + numQuarters);
+                Console.WriteLine("Dimes: " + numDimes);
+                Console.WriteLine("Nickels: " + numNickels);
+                Console.WriteLine("Pennies: " + numPennies);
             }
 
             Console.ReadLine();
